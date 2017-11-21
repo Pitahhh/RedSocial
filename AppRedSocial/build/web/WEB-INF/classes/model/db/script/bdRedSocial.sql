@@ -66,5 +66,6 @@ select * from perfil
 select * from usuario
 select * from imagen
 
+SELECT * FROM usuario WHERE nombre = 'matias' AND pass = '1234'
 select count(id) from seguidores where fk_UsuarioSeguido=1 --Personas Seguidas
 select count(id) from seguidores where fk_UsuarioSeguidor=1 --Personas que te siguen

@@ -7,11 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.db.Data;
+import model.db.Usuario;
 
 /**
  *
@@ -35,7 +40,25 @@ public class InicioSesionServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            response.sendRedirect("");//llenar con redireccion
+            Data d = new Data();
+            
+            String nombre = request.getParameter("user");
+            String pass = request.getParameter("password");
+            
+            Usuario u = d.getUsuario(nombre, pass);
+            
+            if (u != null) {
+                request.getSession().setAttribute("usuario", u);
+                request.getSession().removeAttribute("error");
+                response.sendRedirect("muro.jsp");
+            }else{
+                request.getSession().setAttribute("error", new Error("Nombre o Contraseña Incorrecto"));
+                response.sendRedirect("index.jsp");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InicioSesionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InicioSesionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

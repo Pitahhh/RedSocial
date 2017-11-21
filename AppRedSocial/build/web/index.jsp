@@ -7,11 +7,24 @@
     <body>
         <h1>Sosogram</h1>
         <br>
-        Usuario: <input id="user" type="text" name="user" required="">
-        Contraseña: <input id="password" type="text" name="password" required="">
-        <br><br>
-        <input type="submit" value="Ingresar">
-        
+        <form action="inicioSesion.do" method="POST">
+            
+            Usuario: <input id="user" type="text" name="user" required="required">
+            Contraseña: <input id="password" type="password" name="password" required="required">
+
+            <%
+                Error e = (Error) request.getSession().getAttribute("error");
+                if (e != null) {
+                    out.println("<p class='text-danger input-sm'>" + e.getMessage() + "</p>");
+                    request.getSession().removeAttribute("error");
+                }
+            %>
+
+            <br><br>
+            <input type="submit" value="Ingresar">
+        </form>
+
+
         <!--
         <h3>Crear Usuario</h3>
         Nombre Usuario: <input id="nombre_user" type="text" name="nom_user" required="">
@@ -21,7 +34,7 @@
         Contraseña: <input id="contraseña" type="text" name="contraseña" required="">
         -->
         <br><br>
-        <input type="submit" value="Crear Usuario">
-        
+        <a href="crearUsuario.jsp"><input type="submit" value="Crear Usuario"></a>
+
     </body>
 </html>

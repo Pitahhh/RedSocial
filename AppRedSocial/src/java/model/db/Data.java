@@ -83,12 +83,12 @@ public class Data {
         con.ejecutar(query);
     }
     
-    public Usuario getUsuario(String nombre) throws SQLException {
+    public Usuario getUsuario(String nombre, String pass) throws SQLException {
         Usuario u = null;
 
-        rs = con.ejecutarSelect("SELECT * FROM usuario WHERE rut = '" + nombre + "'");
+        rs = con.ejecutarSelect("SELECT * FROM usuario WHERE nombre = '" + nombre + "' AND pass = '" + pass + "'");
 
-        //rs = con.ejecutarSelect("SELECT * FROM usuario WHERE rut = '" + rut + "'");
+        
         if (rs.next()) {
             u = new Usuario();
 
