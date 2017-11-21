@@ -8,7 +8,11 @@
     <body>
         <h1>Sosogram</h1>
         <div>
-            <img src="https://i.pinimg.com/originals/4d/4e/ff/4d4eff4c653800b383ebd4609dc2e67c.jpg"> 
+            <img src="https://i.pinimg.com/originals/4d/4e/ff/4d4eff4c653800b383ebd4609dc2e67c.jpg">
+            <br><br>
+            <input type="submit" value="Ir Muro">
+            <br><br>
+            <input type="submit" value="Cerrar Sesion">
         </div>
     </body>
 </html>

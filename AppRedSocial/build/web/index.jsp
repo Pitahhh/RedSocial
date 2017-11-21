@@ -15,7 +15,7 @@
             <%
                 Error e = (Error) request.getSession().getAttribute("error");
                 if (e != null) {
-                    out.println("<p class='text-danger input-sm'>" + e.getMessage() + "</p>");
+                    out.println("<p " + e.getMessage() + "</p>");
                     request.getSession().removeAttribute("error");
                 }
             %>
