@@ -18,7 +18,7 @@ public class Data {
 
     public Data() throws SQLException, ClassNotFoundException {
 
-        con = new model.bd.Conexion(
+        con = new model.db.Conexion(
                 "localhost",
                 "BD_RedSocial",//nombre BD
                 "root",

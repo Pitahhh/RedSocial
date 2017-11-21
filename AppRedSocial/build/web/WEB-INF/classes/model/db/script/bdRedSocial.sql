@@ -38,17 +38,6 @@ CREATE TABLE seguidores(
 	FOREIGN KEY (fk_UsuarioSeguidor) REFERENCES perfil(id)
 );
 
-CREATE TABLE publicar(
-    id INT AUTO_INCREMENT,
-    publicacion VARCHAR(500),
-    fk_Usuario int,
-    fk_perfil INT
-    PRIMARY KEY(id),
-    FOREIGN KEY(fk_Usuario) REFERENCES usuario(id),
-    FOREIGN KEY(fk_perfil) REFERENCES perfil(id)
-);
-
-
 
 INSERT INTO usuario VALUES(NULL, 'angel','asd@asd.cl','1234');
 INSERT INTO usuario VALUES(NULL, 'pedro','pedro@asd.cl','1234');

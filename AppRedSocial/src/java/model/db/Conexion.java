@@ -1,4 +1,4 @@
-package model.bd;
+package model.db;
 
 
  
@@ -31,7 +31,7 @@ public class Conexion {
     consultas actualizan los datos --> delete, insert, update
     ver datos --> select
     */
-    public Connection getConection(){
+    public Connection getConnection(){
         
         return con;
     }
