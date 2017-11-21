@@ -22,9 +22,9 @@ CREATE TABLE imagen(
 CREATE TABLE perfil(
 	id INT AUTO_INCREMENT,
 	descripcion VARCHAR(250),
-        fk_usuario INT,
+        fk_imagen INT,
         PRIMARY KEY(id),
-	FOREIGN KEY(fk_usuario) REFERENCES usuario(id)
+	FOREIGN KEY(fk_imagen) REFERENCES imagen(id)
 );
 
 CREATE TABLE seguidores(
@@ -59,7 +59,7 @@ INSERT INTO seguidores VALUES(NULL,'1','3');
 INSERT INTO seguidores VALUES(NULL,'2','1');
 INSERT INTO seguidores VALUES(NULL,'2','3');
 INSERT INTO seguidores VALUES(NULL,'2','4');
-INSERT INTO seguidores VALUES(NULL,'1','5');
+INSERT INTO seguidores VALUES(NULL,'1','1');
 
 select * from seguidores
 select * from perfil
@@ -69,3 +69,13 @@ select * from imagen
 SELECT * FROM usuario WHERE nombre = 'matias' AND pass = '1234'
 select count(id) from seguidores where fk_UsuarioSeguido=1 --Personas Seguidas
 select count(id) from seguidores where fk_UsuarioSeguidor=1 --Personas que te siguen
+
+CREATE VIEW perfilFull AS
+Select perfil.id, perfil.descripcion, imagen.imagen
+FROM perfil, imagen, usuario
+WHERE perfil.fk_imagen = fk_imagen.id AND imagen.fk_Usuario = usuario.id and usuario.id = 2
+
+
+Select imagen.imagen
+FROM perfil, imagen, usuario
+WHERE perfil.fk_imagen = imagen.id AND imagen.fk_Usuario = usuario.id and usuario.id = 2

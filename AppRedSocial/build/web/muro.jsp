@@ -1,6 +1,10 @@
 
+<%@page import="java.util.Base64"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="model.db.PerfilFull"%>
 <%@page import="model.db.Usuario"%>
 <%@page import="model.db.Data"%>
+<%@page import="javax.swing.Icon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -17,7 +21,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        
+        <%
+            //PerfilFull pf = new PerfilFull();
+        %>
         <form action="cerrarSesion.do">
             <button type="submit">Cerrar sesión</button>
         </form>
@@ -29,9 +35,16 @@
                 out.println("Usuario: " + u.getNombre());
 
                 Data d = new Data();
-            }
+                for (PerfilFull pf : d.getPerfil(u.getId())) {
+                        out.println("<br>");
+                        out.println(pf.getImagen());
+                        
+                    }
+                }
             %><h5>
-                <img src="https://i.pinimg.com/originals/4d/4e/ff/4d4eff4c653800b383ebd4609dc2e67c.jpg">
+                <img <%
+
+                    %> >
                 <br>
                 <input type="submit" value="Seguir">
                 </body>
