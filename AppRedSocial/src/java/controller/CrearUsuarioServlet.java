@@ -7,11 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.db.Data;
+import model.db.Usuario;
 
 /**
  *
@@ -34,8 +39,31 @@ public class CrearUsuarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            response.sendRedirect("");//llenar con redireccion
+            Data d = new Data();
+
+                Usuario u = d.getUsuario(request.getParameter("nom_user"), request.getParameter("password"));
+                
+                // Si el usuario no existe
+                if (u == null) {
+                    u = new Usuario();
+
+                    u.setNombre(request.getParameter("nom_user"));
+                    u.setEmail(request.getParameter("correo"));
+                    u.setPass(request.getParameter("password"));
+                    System.out.println(u.getPass());
+                    d.crearUsuario(u);
+                    
+                    request.getSession().removeAttribute("error");
+                    
+                    response.sendRedirect("crearUsuario.jsp");
+                } else {
+                    request.getSession().setAttribute("error", new Error("El usuario ["+u.getNombre()+"] ya se encuentra en la base de datos."));
+                    response.sendRedirect("crearUsuario.jsp");
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CrearUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

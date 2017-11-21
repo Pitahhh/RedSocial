@@ -34,8 +34,9 @@ public class CerrarSesionServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            response.sendRedirect("");//llenar con redireccion
+
+            request.getSession().removeAttribute("usuario");
+            response.sendRedirect("index.jsp");
         }
     }
 

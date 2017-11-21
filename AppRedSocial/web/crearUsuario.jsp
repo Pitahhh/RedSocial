@@ -8,13 +8,16 @@
     </head>
     <body>
         <h1>Crear Usuario</h1>
-        Nombre Usuario: <input id="nombre_user" type="text" name="nom_user" required="">
+        <form action="crearUsuario.do" method="POST">
+            Nombre Usuario: <input type="text" name="nom_user" required="required">
+            <br><br>
+            Correo Electronico: <input type="text" name="correo" required="required">
+            <br><br>
+            Contraseña: <input type="password" name="password" required="required">
+            <input type="submit" value="Crear Usuario">
+        </form>
+        <a href="index.jsp"><input type="submit" value="Volver"></a>
         <br><br>
-        Correo Electronico: <input id="correo" type="text" name="correo" required="">
-        <br><br>
-        Contraseña: <input id="contraseña" type="text" name="contraseña" required="">
         
-        <br><br>
-        <input type="submit" value="Crear Usuario">
     </body>
 </html>

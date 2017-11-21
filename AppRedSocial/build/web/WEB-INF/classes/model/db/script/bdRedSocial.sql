@@ -22,9 +22,9 @@ CREATE TABLE imagen(
 CREATE TABLE perfil(
 	id INT AUTO_INCREMENT,
 	descripcion VARCHAR(250),
-        fk_imagen INT,
+        fk_usuario INT,
         PRIMARY KEY(id),
-	FOREIGN KEY(fk_imagen) REFERENCES imagen(id)
+	FOREIGN KEY(fk_usuario) REFERENCES usuario(id)
 );
 
 CREATE TABLE seguidores(
@@ -52,7 +52,7 @@ INSERT INTO perfil VALUES(NULL,'Buenos dias',1);
 INSERT INTO perfil VALUES(NULL,'Holaa',2);
 INSERT INTO perfil VALUES(NULL,'Fiesta esta noche',3);
 INSERT INTO perfil VALUES(NULL,'Se juega futbol',4);
-INSERT INTO perfil VALUES(NULL,'Se programa',1);
+INSERT INTO perfil VALUES(NULL,'Se programa',5);
 
 INSERT INTO seguidores VALUES(NULL,'1','2'); -- primero sigue
 INSERT INTO seguidores VALUES(NULL,'1','3');

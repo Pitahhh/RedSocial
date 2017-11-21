@@ -55,40 +55,40 @@ public class Data {
             }
         }
     }
-    
-    public List<Imagen> getImagen(Usuario user) throws SQLException{
+
+    public List<Imagen> getImagen(Usuario user) throws SQLException {
         List<Imagen> lista = new ArrayList<>();
         FileOutputStream fos = null;
-        query = "SELECT * FROM IMAGEN WHERE fk_Usuario ="+user.getId();
+        query = "SELECT * FROM IMAGEN WHERE fk_Usuario =" + user.getId();
         rs = con.ejecutarSelect(query);
         Imagen img;
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             img = new Imagen();
-            
+
             img.setId(rs.getInt(1));
             img.setImagen((Icon) rs.getBinaryStream(2));
             img.setDescripcion(rs.getString(3));
             img.setFk_usuario(rs.getInt(4));
-            
+
             lista.add(img);
         }
         con.close();
         return lista;
     }
-    
-    public void crearUsuario(Usuario u) throws SQLException {
-        query = "insert into usuario value(null,'" + u.getNombre() + "','" + u.getEmail() + "'," + u.getPass() + ")";
 
+    public void crearUsuario(Usuario u) throws SQLException {
+        System.out.println(u.getPass());
+        query = "insert into usuario value(null,'" + u.getNombre() + "','" + u.getEmail() + "', '" + u.getPass() + "')";
+        
         con.ejecutar(query);
     }
-    
+
     public Usuario getUsuario(String nombre, String pass) throws SQLException {
         Usuario u = null;
 
         rs = con.ejecutarSelect("SELECT * FROM usuario WHERE nombre = '" + nombre + "' AND pass = '" + pass + "'");
 
-        
         if (rs.next()) {
             u = new Usuario();
 
@@ -96,42 +96,59 @@ public class Data {
             u.setNombre(rs.getString(2));
             u.setEmail(rs.getString(3));
             u.setPass(rs.getString(4));
-            
+
         }
 
         con.close();
 
         return u;
     }
-    
-    public Seguidor getFollows(int id) throws SQLException{
-        
+
+    public List<Perfil> getPerfil(int id) throws SQLException {
+        List<Perfil> lis = new ArrayList<>();
+        query = "select * from perfil where id ="+id;
+
+        rs = con.ejecutarSelect(query);
+
+        Perfil p;
+        if (rs.next()) {
+            p = new Perfil();
+
+            p.setId(rs.getInt(1));
+            p.setDescripcion(rs.getString(2));
+            p.setFk_Usuario(rs.getInt(3));
+            lis.add(p);
+        }
+        return lis;
+    }
+
+    public Seguidor getFollows(int id) throws SQLException {
+
         Seguidor s = new Seguidor(getSeguidos(id), getSeguidores(id));
-        
+
         return s;
     }
-    
-    
+
     //No llamar a estos metodos, llamar al getFollows
-    public int getSeguidos(int id) throws SQLException{
+    public int getSeguidos(int id) throws SQLException {
         int seguidos = 0;
         Seguidor s;
-        query = "select count(id) from seguidores where fk_UsuarioSeguido="+id;
+        query = "select count(id) from seguidores where fk_UsuarioSeguido=" + id;
         rs = con.ejecutarSelect(query);
-        if(rs.next()){
+        if (rs.next()) {
             s = new Seguidor();
             s.setFk_UsuarioSeguido(rs.getInt(1));
             seguidos = s.getFk_UsuarioSeguido();
         }
         return seguidos;
     }
-    
-    public int getSeguidores(int id) throws SQLException{
+
+    public int getSeguidores(int id) throws SQLException {
         int seguidores = 0;
         Seguidor s;
-        query = "select count(id) from seguidores where fk_UsuarioSeguidor="+id;
+        query = "select count(id) from seguidores where fk_UsuarioSeguidor=" + id;
         rs = con.ejecutarSelect(query);
-        if(rs.next()){
+        if (rs.next()) {
             s = new Seguidor();
             s.setFk_UsuarioSeguidor(rs.getInt(1));
             seguidores = s.getFk_UsuarioSeguidor();
