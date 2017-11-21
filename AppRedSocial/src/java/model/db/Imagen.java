@@ -9,6 +9,11 @@ public class Imagen {
     private String descripcion;
     private int fk_usuario;
 
+    public Imagen() {
+    }
+
+    
+    
     public Imagen(Icon imagen, String descripcion, int fk_usuario) {
         this.imagen = imagen;
         this.descripcion = descripcion;

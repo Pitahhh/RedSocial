@@ -6,6 +6,24 @@ public class Usuario {
     private String email;
     private String pass;
 
+    public Usuario() {
+    }
+
+    public Usuario(int id, String nombre, String email, String pass) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.pass = pass;
+    }
+
+    public Usuario(String nombre, String email, String pass) {
+        this.nombre = nombre;
+        this.email = email;
+        this.pass = pass;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

@@ -1,16 +1,16 @@
 package model.db;
 
 public class Seguidor {
-    private int id;
+    
     private int fk_UsuarioSeguido;
     private int fk_UsuarioSeguidor;
 
-    public int getId() {
-        return id;
+    public Seguidor() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Seguidor(int fk_UsuarioSeguido, int fk_UsuarioSeguidor) {
+        this.fk_UsuarioSeguido = fk_UsuarioSeguido;
+        this.fk_UsuarioSeguidor = fk_UsuarioSeguidor;
     }
 
     public int getFk_UsuarioSeguido() {

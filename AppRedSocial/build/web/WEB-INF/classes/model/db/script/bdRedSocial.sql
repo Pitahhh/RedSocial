@@ -1,7 +1,7 @@
 CREATE DATABASE BD_RedSocial; --DROP DATABASE BD_RedSocial
-GO
+
 USE BD_RedSocial;
-GO
+
 CREATE TABLE usuario(
 	id INT AUTO_INCREMENT,
 	nombre VARCHAR(50),
@@ -9,7 +9,7 @@ CREATE TABLE usuario(
 	pass VARCHAR(50),
         PRIMARY KEY(id)
 );
-GO
+
 CREATE TABLE imagen(
     id INT AUTO_INCREMENT,
     imagen LONGBLOB,
@@ -18,17 +18,15 @@ CREATE TABLE imagen(
     PRIMARY KEY(id),
     FOREIGN KEY(fk_Usuario) REFERENCES usuario(id)  
 );
-GO
+
 CREATE TABLE perfil(
 	id INT AUTO_INCREMENT,
 	descripcion VARCHAR(250),
-	fk_Usuario int,
         fk_imagen INT,
         PRIMARY KEY(id),
-	FOREIGN KEY(fk_Usuario) REFERENCES usuario(id)
 	FOREIGN KEY(fk_imagen) REFERENCES imagen(id)
 );
-GO
+
 CREATE TABLE seguidores(
 	id INT AUTO_INCREMENT,
 	fk_UsuarioSeguido int,
@@ -45,13 +43,18 @@ INSERT INTO usuario VALUES(NULL, 'matias','matias@asd.cl','1234');
 INSERT INTO usuario VALUES(NULL, 'veroko','veroko@asd.cl','1234');
 INSERT INTO usuario VALUES(NULL, 'edunaldo','edunaldo@asd.cl','1234');
 
-INSERT INTO perfil VALUES(NULL,'Buenos dias','1');
-INSERT INTO perfil VALUES(NULL,'Holaa','2');
-INSERT INTO perfil VALUES(NULL,'Fiesta esta noche','3');
-INSERT INTO perfil VALUES(NULL,'Se juega futbol','4');
-INSERT INTO perfil VALUES(NULL,'Se programa','5');
+INSERT INTO imagen VALUES(NULL, 'asdasdasd', 'Lindo viajee jeje', 1);
+INSERT INTO imagen VALUES(NULL, 'asd5a4d6a5s4d', 'aqui con los cabros', 2);
+INSERT INTO imagen VALUES(NULL, 'asdasdasdas', 'lindio dia en la playa', 3);
+INSERT INTO imagen VALUES(NULL, 'asdasdasdasasd', 'paseando', 4);
 
-INSERT INTO seguidores VALUES(NULL,'1','2');
+INSERT INTO perfil VALUES(NULL,'Buenos dias',1);
+INSERT INTO perfil VALUES(NULL,'Holaa',2);
+INSERT INTO perfil VALUES(NULL,'Fiesta esta noche',3);
+INSERT INTO perfil VALUES(NULL,'Se juega futbol',4);
+INSERT INTO perfil VALUES(NULL,'Se programa',1);
+
+INSERT INTO seguidores VALUES(NULL,'1','2'); -- primero sigue
 INSERT INTO seguidores VALUES(NULL,'1','3');
 INSERT INTO seguidores VALUES(NULL,'2','1');
 INSERT INTO seguidores VALUES(NULL,'2','3');
@@ -61,3 +64,7 @@ INSERT INTO seguidores VALUES(NULL,'1','5');
 select * from seguidores
 select * from perfil
 select * from usuario
+select * from imagen
+
+select count(id) from seguidores where fk_UsuarioSeguido=1 --Personas Seguidas
+select count(id) from seguidores where fk_UsuarioSeguidor=1 --Personas que te siguen
